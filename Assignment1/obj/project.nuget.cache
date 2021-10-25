@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yJ5DCSPGeJGV+99GmSEF4sG3LG/2ul+ZNxoUkk8/eCDGCJlmYSjc8twOhW0XIDdCiVcEHjw+zhFGoRGbY5D6jQ==",
+  "dgSpecHash": "H7xdu1QAbs0AwDVNQO66P8KKUGlGt+/siCAdDNVAV8RNVUxiVh+63S0ko9k0jmP4gifISRRaQp2z4HMvYdDhuA==",
   "success": true,
   "projectFilePath": "C:\\Users\\nikhi\\source\\repos\\A00453840_MCDA5510\\Assignment1\\Assignment1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\nikhi\\.nuget\\packages\\csvhelper\\27.1.1\\csvhelper.27.1.1.nupkg.sha512"
+  ],
   "logs": []
 }

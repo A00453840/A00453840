@@ -27,7 +27,7 @@ namespace Assignment1
             {
                 watch.Start();
                 Console.WriteLine("Iterating file - " + filepath);
-                csvParser.parse(filepath);
+                csvParser.parse1(filepath);
                 watch.Stop();
                 Console.WriteLine($"Time taken to read this file : {watch.ElapsedMilliseconds} ms");
             }
