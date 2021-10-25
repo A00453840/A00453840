@@ -1,10 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "H7xdu1QAbs0AwDVNQO66P8KKUGlGt+/siCAdDNVAV8RNVUxiVh+63S0ko9k0jmP4gifISRRaQp2z4HMvYdDhuA==",
+  "dgSpecHash": "i+pvxGDKPR5UxIobQa5O/EUGw6976Iz7PyW7GRyGPblDqjXl2IUMfvguTPSe9uzY4bk6fJHOiEAHP+vOm3hdSA==",
   "success": true,
   "projectFilePath": "C:\\Users\\nikhi\\source\\repos\\A00453840_MCDA5510\\Assignment1\\Assignment1.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nikhi\\.nuget\\packages\\csvhelper\\27.1.1\\csvhelper.27.1.1.nupkg.sha512"
+    "C:\\Users\\nikhi\\.nuget\\packages\\csvhelper\\27.1.1\\csvhelper.27.1.1.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\log4net\\2.0.12\\log4net.2.0.12.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0\\system.configuration.configurationmanager.4.5.0.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\system.security.accesscontrol\\4.5.0\\system.security.accesscontrol.4.5.0.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0\\system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
+    "C:\\Users\\nikhi\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }
