@@ -22,6 +22,7 @@ namespace Assignment1
             
             watch.Start();
 
+            //Update the location of sample date directory here
             dirWalker.walk(@"C:\Users\nikhi\source\repos\MCDA5510_Assignments\Sample Data");
 
             watch.Stop();

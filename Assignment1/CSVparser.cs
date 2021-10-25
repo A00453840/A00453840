@@ -15,8 +15,8 @@ namespace Assignment1
         public void parse(String fileName)
         {
             count++;
-            int fileValidRowCount = 0;
-            int fileInvalidRowCount = 0;
+            //int fileValidRowCount = 0;
+            //int fileInvalidRowCount = 0;
             try
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -44,13 +44,14 @@ namespace Assignment1
                             csv.WriteHeader<Customer>();
                             csv.NextRecord();
                         }
-
+                        int i = 0;
                         foreach (var customer in cust)
                         {
-                            if (String.IsNullOrEmpty(customer.FirstName) || String.IsNullOrEmpty(customer.LastName) || String.IsNullOrEmpty(customer.Street) || String.IsNullOrEmpty(customer.StreetNum) || String.IsNullOrEmpty(customer.Province) || String.IsNullOrEmpty(customer.City) || String.IsNullOrEmpty(customer.Country) || String.IsNullOrEmpty(customer.PostalCode) || String.IsNullOrEmpty(customer.Email) || String.IsNullOrEmpty(customer.PhoneNum)) { invalid++; fileInvalidRowCount++; }
+                            i++;
+                            if (String.IsNullOrEmpty(customer.FirstName) || String.IsNullOrEmpty(customer.LastName) || String.IsNullOrEmpty(customer.Street) || String.IsNullOrEmpty(customer.StreetNum) || String.IsNullOrEmpty(customer.Province) || String.IsNullOrEmpty(customer.City) || String.IsNullOrEmpty(customer.Country) || String.IsNullOrEmpty(customer.PostalCode) || String.IsNullOrEmpty(customer.Email) || String.IsNullOrEmpty(customer.PhoneNum)) { invalid++; Console.WriteLine("Invalid data - Skipped row "+i); }
                             else
                             {
-                                valid++; fileValidRowCount++;
+                                valid++;
 
                                 csv.WriteRecord(customer);
                                 csv.NextRecord();
@@ -61,8 +62,8 @@ namespace Assignment1
                     }
                 }
 
-                Console.WriteLine("Valid rows = " + fileValidRowCount);
-                Console.WriteLine("Invalid rows = " + fileInvalidRowCount);
+                //Console.WriteLine("Valid rows = " + fileValidRowCount);
+                //Console.WriteLine("Skipped rows = " + fileInvalidRowCount);
 
             }
             catch (IOException ioe)
