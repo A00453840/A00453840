@@ -11,11 +11,15 @@ namespace Assignment1
             public String LastName { get; set; }
             [Name("Street Number")]
             public String StreetNum { get; set; }
+            [Name("Street")]
             public String Street { get; set; }
+            [Name("City")]
             public String City { get; set; }
+            [Name("Province")]
             public String Province { get; set; }
             [Name("Postal Code")]
             public String PostalCode { get; set; }
+            [Name("Country")]
             public String Country { get; set; }
             [Name("Phone Number")]
             public String PhoneNum { get; set; }

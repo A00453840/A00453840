@@ -3,27 +3,39 @@ using System.IO;
 using System.Linq;
 using CsvHelper;
 using System.Globalization;
-using Microsoft.VisualBasic.FileIO;
+using CsvHelper.Configuration;
 
 namespace Assignment1
 {
     public class CSVparser
     {
-        static int count = 0;
-        public void parse1(String fileName)
+        public static int count = 0;
+        public static int invalid = 0;
+        public static int valid = 0;
+        public void parse(String fileName)
         {
             count++;
+            int fileValidRowCount = 0;
+            int fileInvalidRowCount = 0;
             try
             {
-                int invalid = 0;
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    MissingFieldFound = null,
+                    HeaderValidated = null,
+                    BadDataFound = null,
+                    ShouldSkipRecord = record => record.Record.All(string.IsNullOrWhiteSpace)
+                };
                 using (var reader = new StreamReader(fileName))
-                using (var csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                using (var csvReader = new CsvReader(reader, config))
                 {
                     var customers = csvReader.GetRecords<Customer>();
                     var cust = customers.ToList();
 
-                    var DDIR = System.IO.Directory.GetCurrentDirectory()+ "\\Output.csv";
-                    using (var stream = File.Open(@DDIR, FileMode.Append))
+                    var pathString = System.IO.Directory.GetCurrentDirectory() + "\\Output";
+                    System.IO.Directory.CreateDirectory(pathString);
+                    var dir = pathString + "\\Output.csv";
+                    using (var stream = File.Open(@dir, FileMode.Append))
                     using (var writer = new StreamWriter(stream))
                     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                     {
@@ -35,10 +47,11 @@ namespace Assignment1
 
                         foreach (var customer in cust)
                         {
-                            if (String.IsNullOrEmpty(customer.FirstName) || String.IsNullOrEmpty(customer.LastName) || String.IsNullOrEmpty(customer.Street) || String.IsNullOrEmpty(customer.StreetNum) || String.IsNullOrEmpty(customer.Province) || String.IsNullOrEmpty(customer.City) || String.IsNullOrEmpty(customer.Country) || String.IsNullOrEmpty(customer.PostalCode) || String.IsNullOrEmpty(customer.Email) || String.IsNullOrEmpty(customer.PhoneNum)) { invalid++; }
+                            if (String.IsNullOrEmpty(customer.FirstName) || String.IsNullOrEmpty(customer.LastName) || String.IsNullOrEmpty(customer.Street) || String.IsNullOrEmpty(customer.StreetNum) || String.IsNullOrEmpty(customer.Province) || String.IsNullOrEmpty(customer.City) || String.IsNullOrEmpty(customer.Country) || String.IsNullOrEmpty(customer.PostalCode) || String.IsNullOrEmpty(customer.Email) || String.IsNullOrEmpty(customer.PhoneNum)) { invalid++; fileInvalidRowCount++; }
                             else
                             {
-                                Console.WriteLine(customer.FirstName);
+                                valid++; fileValidRowCount++;
+
                                 csv.WriteRecord(customer);
                                 csv.NextRecord();
                             }
@@ -48,53 +61,21 @@ namespace Assignment1
                     }
                 }
 
-                Console.WriteLine("Invalid rows = " + invalid);
+                Console.WriteLine("Valid rows = " + fileValidRowCount);
+                Console.WriteLine("Invalid rows = " + fileInvalidRowCount);
 
             }
             catch (IOException ioe)
             {
                 Console.WriteLine(ioe.StackTrace);
             }
-
-        }
-        public void parse(String fileName)
-        {
-            try
+            catch (CsvHelper.ReaderException cre)
             {
-                using (TextFieldParser parser = new TextFieldParser(fileName))
-                {
-                    parser.TextFieldType = FieldType.Delimited;
-                    parser.SetDelimiters(",");
-                    int rowCount = 0;
-                    while (!parser.EndOfData)
-                    {
-                        //Process row
-                        string[] fields = parser.ReadFields();
-                        int count = 0;
-                        foreach (string field in fields)
-                        {
-                            if (field.Equals(""))
-                                count++;
-                        }
-                        if (count > 0)
-                        {
-                            Console.WriteLine("Row skipped");
-                        }
-                        else
-                        {
-                            rowCount++;
-                        }
-                    }
-
-                    Console.WriteLine("Valid rows = " + rowCount);
-                }
-
-            }
-            catch (IOException ioe)
-            {
-                Console.WriteLine(ioe.StackTrace);
+                Console.WriteLine(cre.StackTrace);
             }
 
+
         }
+   
     }
 }
