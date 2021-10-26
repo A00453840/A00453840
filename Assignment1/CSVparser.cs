@@ -15,8 +15,12 @@ namespace Assignment1
         public void parse(String fileName)
         {
             count++;
+            String[] split = fileName.Split("\\");
+            var date = split[split.Length - 4] + "/" + split[split.Length - 3] + "/" + split[split.Length - 2];
+            
             //int fileValidRowCount = 0;
             //int fileInvalidRowCount = 0;
+
             try
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -42,6 +46,7 @@ namespace Assignment1
                         if (count==1)
                         {
                             csv.WriteHeader<Customer>();
+                            csv.WriteField("Date");
                             csv.NextRecord();
                         }
                         int i = 0;
@@ -54,6 +59,7 @@ namespace Assignment1
                                 valid++;
 
                                 csv.WriteRecord(customer);
+                                csv.WriteField(date);
                                 csv.NextRecord();
                             }
 
@@ -66,13 +72,28 @@ namespace Assignment1
                 //Console.WriteLine("Skipped rows = " + fileInvalidRowCount);
 
             }
-            catch (IOException ioe)
+
+            catch (FileNotFoundException)
             {
-                Console.WriteLine(ioe.StackTrace);
+                Console.WriteLine("The file or directory cannot be found.");
             }
-            catch (CsvHelper.ReaderException cre)
+            catch (PathTooLongException)
             {
-                Console.WriteLine(cre.StackTrace);
+                Console.WriteLine("'path' exceeds the maxium supported path length.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("You do not have permission to create this file.");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine($"An IO exception occurred:\nError code: " +
+                                  $"{e.HResult & 0x0000FFFF}\nMessage: {e.Message}");
+            }
+            catch (CsvHelper.ReaderException e)
+            {
+                Console.WriteLine($"A Csv reader exception occurred:\nError code: " +
+                                  $"{e.HResult & 0x0000FFFF}\nMessage: {e.Message}");
             }
 
 
